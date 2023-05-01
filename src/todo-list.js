@@ -11,9 +11,14 @@ function createListsContainer(inputName) {
     listsArray.splice(index, 1);
   }
 
+  function getList(index) {
+    return listsArray[index];
+  }
+
   return {
     addTodoList,
     removeTodoList,
+    getList,
 
     get name() {
       return name;
@@ -38,14 +43,9 @@ function createTodoList(inputName) {
     tasksArray.splice(index, 1);
   }
 
-  function toString() {
-    return tasksArray.toString();
-  }
-
   return {
     addTask,
     removeTask,
-    toString,
 
     get name() {
       return name;
