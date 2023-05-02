@@ -107,6 +107,32 @@ section {
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
+section h2 {
+  color: #2c3639;
+  text-align: center;
+  margin: 1em;
+}
+
+section .task {
+  display: flex;
+  justify-content: space-around;
+}
+
+.task > * {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task .complete {
+  width: 2em;
+  height: 2em;
+  border-radius: 100%;
+  margin: 0;
+  border-style: solid;
+}
+
 footer {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;

@@ -23,6 +23,10 @@ function createDisplayController() {
   }
 
   return {
+    addListContainer,
+    switchFocus,
+    removeListContainer,
+
     get focusedContainer() {
       return listContainers[focus.container];
     },
@@ -32,3 +36,5 @@ function createDisplayController() {
     },
   };
 }
+
+export default createDisplayController;
