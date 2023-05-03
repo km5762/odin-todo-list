@@ -27,6 +27,10 @@ function createListsContainer(inputName) {
     set name(setName) {
       name = setName;
     },
+
+    get listsArray() {
+      return listsArray;
+    },
   };
 }
 
@@ -53,6 +57,10 @@ function createTodoList(inputName) {
 
     set name(setName) {
       name = setName;
+    },
+
+    get tasksArray() {
+      return tasksArray;
     },
   };
 }

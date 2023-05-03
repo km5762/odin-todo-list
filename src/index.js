@@ -1,1 +1,5 @@
-import { createListsContainer, createTask, createTodoList } from "./todo-list";
+import createDisplayView from "./display-view";
+
+window.addEventListener("load", () => {
+  createDisplayView();
+});
