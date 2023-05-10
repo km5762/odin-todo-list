@@ -18,14 +18,31 @@ function createDisplayController() {
     return this;
   }
 
+  function switchFocusedList(list) {
+    focus.list = list;
+    return this;
+  }
+
+  function switchFocusedContainer(container) {
+    focus.container = container;
+    return this;
+  }
+
   function removeListContainer(index) {
     listContainers.splice(index, 1);
+  }
+
+  function incrementFocusedList() {
+    focus.list += 1;
   }
 
   return {
     addListContainer,
     switchFocus,
     removeListContainer,
+    switchFocusedContainer,
+    switchFocusedList,
+    incrementFocusedList,
 
     get focusedContainer() {
       return listContainers[focus.container];
@@ -33,6 +50,14 @@ function createDisplayController() {
 
     get focusedList() {
       return this.focusedContainer.getList(focus.list);
+    },
+
+    get newestList() {
+      return this.focusedContainer.getList(
+        this.focusedContainer.listsArray[
+          this.focusedContainer.listsArray.length - 1
+        ]
+      );
     },
   };
 }

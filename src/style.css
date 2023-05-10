@@ -22,7 +22,7 @@ h2 {
   display: grid;
   height: 100%;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1.75fr 8fr 0.75fr;
+  grid-template-rows: 1.75fr 8fr 0.55fr;
 }
 
 header {
@@ -43,15 +43,25 @@ header svg {
   max-height: 100%;
 }
 
-aside {
-  background-color: #3f4e4f;
+.aside-container {
+  overflow: inherit;
   grid-row: 2 / 3;
   grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+}
+
+aside {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  background-color: #3f4e4f;
   padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  max-height: 100%;
 }
 
 aside .lists {
@@ -66,6 +76,7 @@ aside .list {
   display: flex;
   align-items: center;
   gap: 1em;
+  cursor: pointer;
 }
 
 aside .list:hover {
@@ -102,7 +113,7 @@ aside .list svg {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 3; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -112,31 +123,36 @@ aside .list svg {
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
+  margin: 15% auto;
+  border-radius: 1em;
+  padding: 10px;
+  width: min-content;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.add-list-form > * {
+  margin: 0.5em;
+}
+.modal h2 {
+  color: #2c3639;
+  font-weight: 500;
+  text-align: center;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.form-buttons {
+  display: flex;
+  width: 1fr;
+  justify-content: flex-end;
+  gap: 1em;
 }
 
 section {
+  position: relative;
   background-color: #dcd7c9;
   grid-row: 2 / 3;
   grid-column: 2 / 3;
@@ -168,12 +184,33 @@ section .task {
   border-radius: 100%;
   margin: 0;
   border-style: solid;
+  cursor: pointer;
+}
+
+.add-task-icon {
+  display: none;
+  width: 4em;
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  z-index: 1;
+  color: #01796f;
+  cursor: pointer;
 }
 
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   background-color: #a27b5c;
   grid-row: 3 / end;
   grid-column: 1 / end;
+}
+
+footer span {
+  color: #fefefe;
 }

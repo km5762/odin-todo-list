@@ -16,10 +16,36 @@
     <title>Todo List</title>
   </head>
   <body>
-    <div id="myModal" class="modal">
+    <div id="add-list-modal" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <h3>Add List</h3>
+        <form action="" class="add-list-form">
+          <div>
+            <label for="list-name-input" aria-label="required"></label>
+            <input type="text" class="name" id="list-name-input" />
+          </div>
+          <div class="form-buttons">
+            <button class="close-modal">✖</button>
+            <button class="submit-modal" type="submit">✔</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="add-task-modal" class="modal">
+      <div class="modal-content">
+        <h3>Add Task</h3>
+        <form action="" class="add-task-form">
+          <div>
+            <label for="task-name-input" aria-label="required"></label>
+            <input type="text" class="name" id="task-name-input" />
+            <label for="task-due-input" aria-label="required"></label>
+            <input type="date" class="due-date" id="task-name-input" />
+          </div>
+          <div class="form-buttons">
+            <button class="close-modal">✖</button>
+            <button class="submit-modal" type="submit">✔</button>
+          </div>
+        </form>
       </div>
     </div>
     <div class="layout">
@@ -36,50 +62,66 @@
         </svg>
         <h1>To-<em>do</em></h1>
       </header>
-      <aside>
-        <div>
-          <h2>Saved Lists</h2>
-          <hr />
-        </div>
-        <div class="lists">
-          <template id="list-template">
-            <div class="list">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <title>format-list-bulleted</title>
-                <path
-                  d="M7,5H21V7H7V5M7,13V11H21V13H7M4,4.5A1.5,1.5 0 0,1 5.5,6A1.5,1.5 0 0,1 4,7.5A1.5,1.5 0 0,1 2.5,6A1.5,1.5 0 0,1 4,4.5M4,10.5A1.5,1.5 0 0,1 5.5,12A1.5,1.5 0 0,1 4,13.5A1.5,1.5 0 0,1 2.5,12A1.5,1.5 0 0,1 4,10.5M7,19V17H21V19H7M4,16.5A1.5,1.5 0 0,1 5.5,18A1.5,1.5 0 0,1 4,19.5A1.5,1.5 0 0,1 2.5,18A1.5,1.5 0 0,1 4,16.5Z"
-                />
-              </svg>
-              <span class="name"></span>
-            </div>
-          </template>
-        </div>
-        <div>
-          <hr />
-          <div class="add-list">
-            <button>+</button>
-          </div>
-        </div>
-      </aside>
-      <section>
-        <h2></h2>
-        <hr />
-        <div class="list-content">
-          <template id="task-template">
-            <div class="task">
-              <div><button class="complete"></button></div>
-              <span class="description"></span>
-              <span class="due-date"></span>
-            </div>
+      <div class="aside-container">
+        <aside>
+          <div>
+            <h2>Saved Lists</h2>
             <hr />
-          </template>
+          </div>
+          <div class="lists"></div>
+          <div>
+            <hr />
+            <div class="add-list">
+              <button>+</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <section>
+        <h2>No list selected. Create one to begin.</h2>
+        <div class="task">
+          <span></span>
+          <span class="description">Description</span>
+          <span class="due-date">Due</span>
         </div>
+        <hr />
+        <div class="list-content"></div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="add-task-icon"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <title>plus-circle</title>
+          <path
+            d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+          />
+        </svg>
       </section>
-      <footer></footer>
+      <footer><span>Copyright © 2023 km5762</span></footer>
     </div>
+    <template id="list-template">
+      <div class="list">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <title>format-list-bulleted</title>
+          <path
+            d="M7,5H21V7H7V5M7,13V11H21V13H7M4,4.5A1.5,1.5 0 0,1 5.5,6A1.5,1.5 0 0,1 4,7.5A1.5,1.5 0 0,1 2.5,6A1.5,1.5 0 0,1 4,4.5M4,10.5A1.5,1.5 0 0,1 5.5,12A1.5,1.5 0 0,1 4,13.5A1.5,1.5 0 0,1 2.5,12A1.5,1.5 0 0,1 4,10.5M7,19V17H21V19H7M4,16.5A1.5,1.5 0 0,1 5.5,18A1.5,1.5 0 0,1 4,19.5A1.5,1.5 0 0,1 2.5,18A1.5,1.5 0 0,1 4,16.5Z"
+          />
+        </svg>
+        <span class="name"></span>
+      </div>
+    </template>
+    <template id="task-template">
+      <div class="task">
+        <div><input class="complete" type="checkbox"></input></div>
+        <span class="description"></span>
+        <span class="due-date"></span>
+      </div>
+      <hr />
+    </template>
   </body>
 </html>
