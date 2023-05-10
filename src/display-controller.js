@@ -1,7 +1,8 @@
-import { createListsContainer, createTask, createTodoList } from "./todo-list";
+import createListsContainer from "./todo-list";
 
-function createDisplayController() {
-  const listContainers = [];
+function createDisplayController(inputListContainers) {
+  const listContainers = inputListContainers ?? [];
+
   const focus = {
     container: null,
     list: null,
@@ -32,17 +33,12 @@ function createDisplayController() {
     listContainers.splice(index, 1);
   }
 
-  function incrementFocusedList() {
-    focus.list += 1;
-  }
-
   return {
     addListContainer,
     switchFocus,
     removeListContainer,
     switchFocusedContainer,
     switchFocusedList,
-    incrementFocusedList,
 
     get focusedContainer() {
       return listContainers[focus.container];
@@ -58,6 +54,10 @@ function createDisplayController() {
           this.focusedContainer.listsArray.length - 1
         ]
       );
+    },
+
+    get listContainers() {
+      return listContainers;
     },
   };
 }

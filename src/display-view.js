@@ -1,10 +1,7 @@
-import createDisplayController from "./display-controller";
 import { createListsContainer, createTask, createTodoList } from "./todo-list";
 
-function createDisplayView() {
-  const controller = createDisplayController();
-  controller.addListContainer(createListsContainer("main"));
-  controller.switchFocus(0, -1);
+function createDisplayView(controller) {
+  controller.switchFocus(0, 0);
 
   function renderTask(task, index) {
     const listContent = document.querySelector(".list-content");
@@ -74,6 +71,10 @@ function createDisplayView() {
     listHeader.textContent = currentList.name;
     renderLists(currentContainer);
     renderTasks(currentList);
+    localStorage.setItem(
+      "containers",
+      JSON.stringify(controller.listContainers)
+    );
   }
 
   function renderLists(container) {
@@ -158,6 +159,7 @@ function createDisplayView() {
 
   createAddListModal();
   createAddTaskModal();
+  updateView();
 }
 
 export default createDisplayView;
