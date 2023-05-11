@@ -1,4 +1,4 @@
-import createListsContainer from "./todo-list";
+import { createListsContainer } from "./todo-list";
 
 function createDisplayController(inputListContainers) {
   const listContainers = inputListContainers ?? [];

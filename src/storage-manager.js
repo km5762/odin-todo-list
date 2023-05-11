@@ -5,6 +5,7 @@ import { createListsContainer, createTask, createTodoList } from "./todo-list";
 function createStorageManager() {
   function retrieveDisplayController() {
     const containersString = localStorage.getItem("containers");
+    console.log(containersString);
 
     if (containersString) {
       const containersJSON = JSON.parse(containersString);
@@ -20,9 +21,19 @@ function createStorageManager() {
             k < containersJSON[i].listsArray[j].tasksArray.length;
             k++
           ) {
+            let date = null;
+            if (
+              containersJSON[i].listsArray[j].tasksArray[k].dueDate !== null
+            ) {
+              date = new Date(
+                Date.parse(
+                  containersJSON[i].listsArray[j].tasksArray[k].dueDate
+                )
+              );
+            }
             const task = createTask(
-              containersJSON[i].listsArray[j].tasksArray[k].name,
-              containersJSON[i].listsArray[j].tasksArray[k].dueDate
+              containersJSON[i].listsArray[j].tasksArray[k].description,
+              date
             );
             list.addTask(task);
           }
@@ -33,7 +44,9 @@ function createStorageManager() {
       const controller = createDisplayController(listContainers);
       return controller;
     }
-    return createDisplayController();
+    const controller = createDisplayController();
+    controller.addListContainer("main");
+    return controller;
   }
 
   return { retrieveDisplayController };

@@ -12,7 +12,6 @@ function createDisplayView(controller) {
     const templateDueDate = templateClone.querySelector(".due-date");
     let formattedDate;
 
-    // Create the formatted date string
     if (task.dueDate !== null) {
       formattedDate = task.dueDate.toISOString().slice(0, 10);
     } else {
@@ -24,6 +23,12 @@ function createDisplayView(controller) {
 
     completeTask.addEventListener("click", () => {
       controller.focusedList.removeTask(index);
+
+      localStorage.setItem(
+        "containers",
+        JSON.stringify(controller.listContainers)
+      );
+
       updateView();
     });
 
@@ -66,15 +71,10 @@ function createDisplayView(controller) {
     const listHeader = document.querySelector("section h2");
     const currentContainer = controller.focusedContainer;
     const currentList = controller.focusedList;
-    console.log(currentList);
 
     listHeader.textContent = currentList.name;
     renderLists(currentContainer);
     renderTasks(currentList);
-    localStorage.setItem(
-      "containers",
-      JSON.stringify(controller.listContainers)
-    );
   }
 
   function renderLists(container) {
@@ -117,6 +117,11 @@ function createDisplayView(controller) {
         controller.focusedContainer.listsArray.length - 1
       ); // switch focus to last list
 
+      localStorage.setItem(
+        "containers",
+        JSON.stringify(controller.listContainers)
+      );
+
       addTaskButton.style.display = "block";
       updateView();
     });
@@ -148,10 +153,13 @@ function createDisplayView(controller) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const dueDate = form.querySelector(".due-date").valueAsDate;
-      console.log(dueDate);
       const task = createTask(name.value, dueDate);
       controller.focusedList.addTask(task);
       modal.style.display = "none";
+      localStorage.setItem(
+        "containers",
+        JSON.stringify(controller.listContainers)
+      );
       form.reset();
       updateView();
     });
